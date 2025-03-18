@@ -12,6 +12,10 @@ const AppLayout = () => {
 					name="cards/index"
 					options={{ headerShown: false }}
 				/>
+				<Stack.Screen
+					name="screens/selection/index"
+					options={{ headerShown: false }}
+				/>
 			</Stack>
 		</CardProvider>
 	)
