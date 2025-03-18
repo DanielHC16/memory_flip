@@ -1,3 +1,4 @@
+import { CardData } from "@/models/cardType"
 import React, { createContext, useState } from "react"
 
 interface CardContextType {
@@ -5,6 +6,8 @@ interface CardContextType {
 	setSelectedLabel: React.Dispatch<React.SetStateAction<string>>
 	tempLabel: string
 	setTempLabel: React.Dispatch<React.SetStateAction<string>>
+	setActiveCategoryData: React.Dispatch<React.SetStateAction<CardData[]>>
+	activeCategoryData: CardData[]
 }
 
 export const CardContext = createContext<CardContextType>({
@@ -12,6 +15,8 @@ export const CardContext = createContext<CardContextType>({
 	setSelectedLabel: () => {},
 	tempLabel: "",
 	setTempLabel: () => {},
+	setActiveCategoryData: () => {},
+	activeCategoryData: [],
 })
 
 interface CardContextProps {
@@ -20,6 +25,7 @@ interface CardContextProps {
 const CardProvider = ({ children }: CardContextProps) => {
 	const [selectedLabel, setSelectedLabel] = useState<string>("dgsgsg")
 	const [tempLabel, setTempLabel] = useState<string>("gdfgfdgd")
+	const [activeCategoryData, setActiveCategoryData] = useState<CardData[]>([])
 
 	return (
 		<CardContext.Provider
@@ -28,6 +34,8 @@ const CardProvider = ({ children }: CardContextProps) => {
 				setSelectedLabel,
 				tempLabel,
 				setTempLabel,
+				setActiveCategoryData,
+				activeCategoryData,
 			}}
 		>
 			{children}
