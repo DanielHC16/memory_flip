@@ -2,6 +2,12 @@ const tintColorLight = "#0a7ea4"
 const tintColorDark = "#fff"
 
 export const Colors = {
+	purple: "#D61C86",
+	skyblue: "#5FFBF1",
+	darkblue: "#051937",
+	red: "#FF0000",
+	black: "#000000",
+
 	light: {
 		text: "#11181C",
 		background: "#fff",
