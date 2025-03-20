@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { View, Text, ListRenderItem, FlatList } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { CardContext } from "@/context/cardContext"
@@ -10,11 +10,19 @@ import ExitModal from "@/components/modals/ExitModal"
 import FlipCard from "@/components/cards/FlipCard"
 import TimeupModal from "@/components/modals/TimeupModal"
 import OptionsModal from "@/components/modals/OptionsModal"
+import LottieView from "lottie-react-native"
 
 const FruitCards = () => {
-	const { selectedLabel, setSelectedLabel, activeCategoryData } =
-		useContext(CardContext)
+	const {
+		selectedLabel,
+		setSelectedLabel,
+		selectedCategory,
+		activeCategoryData,
+	} = useContext(CardContext)
 	const router = useRouter()
+
+	const animationRef = useRef<LottieView>(null)
+
 	const [flippedCards, setFlippedCards] = useState<number[]>([])
 	const [matchedCards, setMatchedCards] = useState<number[]>([])
 	const [score, setScore] = useState<number>(0)
@@ -88,13 +96,15 @@ const FruitCards = () => {
 		setIsPlaying(false)
 		setTime(0)
 		setOptionsModalVisible(false)
+		animationRef.current?.reset()
 		setTimeout(() => {
 			setIsPressable(true)
 			setIsPlaying(true)
+			animationRef.current?.play()
 		}, 1500)
 		setTimeout(() => {
 			flipAllCards()
-		}, 500)
+		}, 300)
 	}
 
 	const handleRestartAndShuffle = () => {
@@ -112,7 +122,7 @@ const FruitCards = () => {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsPressable(true)
-		}, 1500)
+		}, 1200)
 	}, [])
 
 	useEffect(() => {
@@ -129,6 +139,7 @@ const FruitCards = () => {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsPlaying(true)
+			animationRef.current?.play()
 		}, 1000)
 	}, [])
 
@@ -185,8 +196,34 @@ const FruitCards = () => {
 					onPress={() => {
 						setExitModalVisible(!exitModalVisible)
 						setIsPlaying(false)
+						animationRef.current?.pause()
 					}}
 				/>
+
+				<View
+					style={{
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "flex-start",
+						height: 50,
+						borderWidth: 1.4,
+						borderColor: "#fff",
+						paddingRight: 8,
+						borderRadius: 12,
+					}}
+				>
+					<View style={{ width: 60, height: 50 }}>
+						<LottieView
+							ref={animationRef}
+							source={require("@/assets/gifs/sandwatch.json")}
+							loop
+							style={{ width: "100%", height: "100%" }}
+						/>
+					</View>
+					<Text className="text-3xl font-medium text-white">
+						{formattedMins}:{formattedSeconds}
+					</Text>
+				</View>
 				<AntDesign
 					name={isPaused ? "play" : "pause"}
 					size={40}
@@ -195,13 +232,15 @@ const FruitCards = () => {
 						setOptionsModalVisible(!optionsModalVisible)
 						setIsPlaying(false)
 						setIsPaused(!isPaused)
+						animationRef.current?.pause()
 					}}
 				/>
 			</View>
-			<Text className="text-3xl font-medium text-white mt-5">
-				Time: {formattedMins}:{formattedSeconds}
+			<Text className="text-2xl text-center font-bold text-cyan-950 mt-5">
+				{selectedCategory.toUpperCase()}
 			</Text>
-			<Text className="text-3xl font-medium text-white mt-5">
+
+			<Text className="text-3xl font-medium text-cyan-950 mt-5">
 				SCORE: {score}
 			</Text>
 			<FlatList
@@ -219,6 +258,7 @@ const FruitCards = () => {
 					onPressNo={() => {
 						setExitModalVisible(false)
 						setIsPlaying(true)
+						animationRef.current?.play()
 					}}
 					onPressYes={() => {
 						router.back()
@@ -243,6 +283,7 @@ const FruitCards = () => {
 					onExitGame={() => setExitModalVisible(!exitModalVisible)}
 					onRestart={handleRestart}
 					onResume={() => {
+						animationRef.current?.play()
 						setIsPaused(!isPaused)
 						setIsPlaying(true)
 						setOptionsModalVisible(!optionsModalVisible)
