@@ -1,6 +1,5 @@
 import fruits from "@/constants/fruits_veg_images"
 import { CardData } from "@/models/cardType"
-import { ImageSourcePropType } from "react-native"
 
 export const FRUITS_VEGETABLES_DATA: CardData[] = [
 	{
