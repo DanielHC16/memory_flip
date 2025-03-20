@@ -8,6 +8,8 @@ interface CardContextType {
 	setTempLabel: React.Dispatch<React.SetStateAction<string>>
 	setActiveCategoryData: React.Dispatch<React.SetStateAction<CardData[]>>
 	activeCategoryData: CardData[]
+	selectedCategory: string
+	setSelectedCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const CardContext = createContext<CardContextType>({
@@ -17,21 +19,26 @@ export const CardContext = createContext<CardContextType>({
 	setTempLabel: () => {},
 	setActiveCategoryData: () => {},
 	activeCategoryData: [],
+	selectedCategory: "",
+	setSelectedCategory: () => {},
 })
 
 interface CardContextProps {
 	children: React.ReactNode
 }
 const CardProvider = ({ children }: CardContextProps) => {
-	const [selectedLabel, setSelectedLabel] = useState<string>("dgsgsg")
-	const [tempLabel, setTempLabel] = useState<string>("gdfgfdgd")
+	const [selectedLabel, setSelectedLabel] = useState<string>("")
+	const [tempLabel, setTempLabel] = useState<string>("")
 	const [activeCategoryData, setActiveCategoryData] = useState<CardData[]>([])
+	const [selectedCategory, setSelectedCategory] = useState<string>("")
 
 	return (
 		<CardContext.Provider
 			value={{
 				selectedLabel,
 				setSelectedLabel,
+				selectedCategory,
+				setSelectedCategory,
 				tempLabel,
 				setTempLabel,
 				setActiveCategoryData,
