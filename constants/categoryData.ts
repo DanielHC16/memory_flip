@@ -5,6 +5,8 @@ import animals from "@/constants/animal_images"
 import fruit_vegs from "@/constants/fruits_veg_images"
 
 import { ImageSourcePropType } from "react-native"
+import { SPACE_DATA } from "./spaceData"
+import space_images from "./space_images"
 export interface Category {
 	id: string
 	data: CardData[]
@@ -21,5 +23,11 @@ export const CATEGORIES_DATA: Category[] = [
 		id: "animals",
 		data: ANIMALS_DATA,
 		img: animals.animals,
+	},
+
+	{
+		id: "space",
+		data: SPACE_DATA,
+		img: space_images.space,
 	},
 ]
