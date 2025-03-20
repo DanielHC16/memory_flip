@@ -16,13 +16,16 @@ import { Colors } from "react-native/Libraries/NewAppScreen"
 import LottieView from "lottie-react-native"
 
 const Selection = () => {
-	const { setActiveCategoryData, setSelectedLabel, setTempLabel } =
-		useContext(CardContext)
+	const {
+		setActiveCategoryData,
+		setSelectedLabel,
+		setTempLabel,
+		setSelectedCategory,
+	} = useContext(CardContext)
 	const router = useRouter()
 	const handleSelection = (d: CardData[]) => {
 		setModalVisible(true)
 		setActiveCategoryData(d)
-
 		setSelectedLabel("")
 		setTempLabel("")
 
@@ -49,7 +52,10 @@ const Selection = () => {
 					{CATEGORIES_DATA.map((c) => (
 						<Pressable
 							key={c.id}
-							onPress={() => handleSelection(c.data)}
+							onPress={() => {
+								setSelectedCategory(c.id)
+								handleSelection(c.data)
+							}}
 						>
 							<ImageBackground
 								source={c.img}
