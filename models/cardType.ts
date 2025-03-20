@@ -5,3 +5,13 @@ export interface CardData {
 	label: string
 	img: ImageSourcePropType | undefined
 }
+
+export interface FlipCardProps {
+	image: ImageSourcePropType | undefined
+	label: string
+	id: number
+	onFlip: (label: string, id: number) => void
+	isFlipped: boolean
+	isMatched: boolean
+	isPressable: boolean
+}

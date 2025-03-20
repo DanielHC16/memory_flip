@@ -1,20 +1,12 @@
-import { View, Image, Pressable, ImageSourcePropType } from "react-native"
+import { View, Image, Pressable } from "react-native"
 import React, { FC, useEffect } from "react"
 import Animated, {
 	useAnimatedStyle,
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated"
+import { FlipCardProps } from "@/models/cardType"
 
-interface FlipCardProps {
-	image: ImageSourcePropType | undefined
-	label: string
-	id: number
-	onFlip: (label: string, id: number) => void
-	isFlipped: boolean
-	isMatched: boolean
-	isPressable: boolean
-}
 const FlipCard: FC<FlipCardProps> = ({
 	image,
 	label,
@@ -28,7 +20,7 @@ const FlipCard: FC<FlipCardProps> = ({
 
 	useEffect(() => {
 		// Handle flip animation based on isFlipped or isMatched states
-		rotate.value = withTiming(isFlipped || isMatched ? 180 : 0, {
+		rotate.value = withTiming(isFlipped || isMatched ? 0 : 180, {
 			duration: 300,
 		})
 	}, [isFlipped, isMatched])
