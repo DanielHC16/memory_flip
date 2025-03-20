@@ -39,7 +39,7 @@ const Selection = () => {
 	return (
 		<View className="flex-1">
 			<LinearGradient
-				colors={["#35bee8", "#c545df"]}
+				colors={["#35bee8", "#4554df"]}
 				className="flex-1 pt-8"
 			>
 				<Text className="text-white text-2xl font-bold text-center mt-4">
