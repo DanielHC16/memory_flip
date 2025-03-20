@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { View, Text, ListRenderItem, FlatList } from "react-native"
+import { View, Text, ListRenderItem, FlatList, BackHandler } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { CardContext } from "@/context/cardContext"
 import { AntDesign } from "@expo/vector-icons"
@@ -13,6 +13,20 @@ import OptionsModal from "@/components/modals/OptionsModal"
 import LottieView from "lottie-react-native"
 
 const FruitCards = () => {
+	useEffect(() => {
+		const backAction = () => {
+			setExitModalVisible(!exitModalVisible)
+			setIsPlaying(false)
+			animationRef.current?.pause()
+			return true
+		}
+
+		BackHandler.addEventListener("hardwareBackPress", backAction)
+
+		return () => {
+			BackHandler.removeEventListener("hardwareBackPress", backAction)
+		}
+	}, [])
 	const {
 		selectedLabel,
 		setSelectedLabel,

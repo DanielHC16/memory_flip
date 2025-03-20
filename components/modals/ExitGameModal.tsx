@@ -4,7 +4,7 @@ import { Colors } from "@/constants/Colors"
 import { LinearGradient } from "expo-linear-gradient"
 import { ExitModalProps } from "@/models/ModalTypes"
 
-const ExitModal: FC<ExitModalProps> = ({
+const ExitGameModal: FC<ExitModalProps> = ({
 	onClose,
 	visible,
 	onPressNo,
@@ -20,11 +20,11 @@ const ExitModal: FC<ExitModalProps> = ({
 				onRequestClose={onClose}
 			>
 				<View style={styles.modalBackground}>
-					<View className="bg-white w-80 py-5 items-center rounded-3xl">
-						<Text className="text-center text-xl">
-							Cancel and go back?
+					<View className="bg-white p-5 items-center rounded-3xl gap-y-6">
+						<Text className="text-center text-2xl text-black">
+							Are you sure you want to exit game?
 						</Text>
-						<View className="w-full flex-row gap-x-2 justify-center items-center mt-4">
+						<View className="w-full flex-row gap-x-2 items-center mt-4">
 							<LinearGradient
 								style={{ borderRadius: 16 }}
 								colors={[Colors.skyblue, Colors.darkblue]}
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
 		aspectRatio: 1,
 	},
 })
-export default ExitModal
+export default ExitGameModal

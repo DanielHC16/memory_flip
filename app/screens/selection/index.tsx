@@ -5,8 +5,9 @@ import {
 	ImageBackground,
 	Modal,
 	StyleSheet,
+	BackHandler,
 } from "react-native"
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { LinearGradient } from "expo-linear-gradient"
 import { CATEGORIES_DATA } from "@/constants/categoryData"
 import { CardContext } from "@/context/cardContext"
@@ -16,6 +17,17 @@ import { Colors } from "react-native/Libraries/NewAppScreen"
 import LottieView from "lottie-react-native"
 
 const Selection = () => {
+	useEffect(() => {
+		const backAction = () => {
+			router.back()
+			return true
+		}
+		BackHandler.addEventListener("hardwareBackPress", backAction)
+		return () => {
+			BackHandler.removeEventListener("hardwareBackPress", backAction)
+		}
+	}, [])
+
 	const {
 		setActiveCategoryData,
 		setSelectedLabel,
