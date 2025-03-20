@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { View, Text } from "react-native"
+import { View, Text, ListRenderItem, FlatList } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
 import { CardContext } from "@/context/cardContext"
 import { AntDesign } from "@expo/vector-icons"
@@ -157,6 +157,21 @@ const FruitCards = () => {
 		}
 	}, [time, isPlaying])
 
+	const renderItem: ListRenderItem<CardData> = ({ item }) => {
+		return (
+			<FlipCard
+				isPressable={isPressable}
+				key={item.id}
+				id={item.id}
+				image={item.img}
+				label={item.label}
+				onFlip={handleFlip}
+				isFlipped={flippedCards.includes(item.id) || flipAll}
+				isMatched={matchedCards.includes(item.id)}
+			/>
+		)
+	}
+
 	return (
 		<LinearGradient
 			colors={["#35E89c", "#060433"]}
@@ -189,20 +204,14 @@ const FruitCards = () => {
 			<Text className="text-3xl font-medium text-white mt-5">
 				SCORE: {score}
 			</Text>
-			<View className="flex-row flex-wrap justify-center w-full gap-4 mt-6">
-				{shuffledData.map((c) => (
-					<FlipCard
-						isPressable={isPressable}
-						key={c.id}
-						id={c.id}
-						image={c.img}
-						label={c.label}
-						onFlip={handleFlip}
-						isFlipped={flippedCards.includes(c.id) || flipAll}
-						isMatched={matchedCards.includes(c.id)}
-					/>
-				))}
-			</View>
+			<FlatList
+				keyExtractor={(item) => item.id.toString()}
+				data={shuffledData}
+				renderItem={renderItem}
+				contentContainerStyle={{ rowGap: 10, marginTop: 24 }}
+				columnWrapperStyle={{ gap: 10 }}
+				numColumns={3}
+			/>
 			<View>
 				<ExitModal
 					onClose={() => setExitModalVisible(!exitModalVisible)}
