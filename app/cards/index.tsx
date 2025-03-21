@@ -166,7 +166,6 @@ const FruitCards = () => {
 				if (matchedCards.length === activeCategoryData.length) {
 					setGameOverModalVisible(true)
 				} else {
-					setMatchedCards([])
 					setTimeupModalVisible(true)
 				}
 			}
