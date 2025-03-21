@@ -146,6 +146,7 @@ const FruitCards = () => {
 	useEffect(() => {
 		if (matchedCards.length === activeCategoryData.length) {
 			setGameOverModalVisible(true)
+			animationRef.current?.pause()
 			setIsPlaying(false)
 		}
 	}, [matchedCards])
@@ -162,11 +163,11 @@ const FruitCards = () => {
 
 		if (time === 60) {
 			setIsPlaying(false)
+			animationRef.current?.pause()
 			{
 				if (matchedCards.length === activeCategoryData.length) {
 					setGameOverModalVisible(true)
 				} else {
-					animationRef.current?.pause()
 					setIsPlaying(false)
 					setTimeupModalVisible(true)
 				}
