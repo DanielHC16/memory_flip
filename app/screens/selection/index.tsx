@@ -58,8 +58,9 @@ const Selection = () => {
 				className="flex-1 pt-8"
 			>
 				<Text className="text-white text-2xl font-bold text-center mt-4">
-					Select a category to start!
+					Choose a category to start playing!
 				</Text>
+				
 				<View className="justify-center items-center gap-4 mt-6 flex-row flex-wrap">
 					{CATEGORIES_DATA.map((c) => (
 						<Pressable
@@ -105,7 +106,7 @@ const Selection = () => {
 							className="justify-center items-center py-5 w-96"
 						>
 							<Text className="text-white text-2xl font-bold">
-								Game is beginning!
+								Loading...
 							</Text>
 							<Text className="text-white text-2xl font-bold">
 								{/* {
