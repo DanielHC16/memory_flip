@@ -17,23 +17,23 @@ export interface Category {
 
 export const CATEGORIES_DATA: Category[] = [
 	{
-		id: "fruits",
+		id: "Fruits",
 		data: FRUITS_VEGETABLES_DATA,
 		img: fruit_vegs.fruit_vegs,
 	},
 	{
-		id: "animals",
+		id: "Food",
 		data: ANIMALS_DATA,
 		img: animals.animals,
 	},
 
 	{
-		id: "space",
+		id: "Heroes",
 		data: SPACE_DATA,
 		img: space_images.space,
 	},
 	{
-		id: "music",
+		id: "Fiestas",
 		data: MUSIC_DATA,
 		img: music_images.music,
 	},

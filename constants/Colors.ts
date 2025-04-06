@@ -10,7 +10,9 @@ export const Colors = {
 
 	// New Colors
 	green: "#32CD32",
+	light_green: "rgba(160, 160, 96, 0.6)",
 	white: "#FFFFFF",
+	cornsilk: "FEFAE0",
 	
 
 	light: {

@@ -54,42 +54,46 @@ const Selection = () => {
 	return (
 		<View className="flex-1">
 			<LinearGradient
-				colors={["#35bee8", "#4554df"]}
+				colors={["cornsilk", "cornsilk"]}
 				className="flex-1 pt-8"
 			>
-				<Text className="text-white text-2xl font-bold text-center mt-4">
-					Choose a category to start playing!
-				</Text>
+			<View className="mb-8 mt-16">
+  <View className="border border-[#A0A060] px-4 py-2 rounded-lg self-center shadow-sm bg-[#D9D4AB]">
+    <Text className="text-2xl font-extrabold text-center text-[#3C3B1F]">
+      Choose a{' '}
+      <Text className="text-green-700">
+        category
+      </Text>{' '}
+      to start playing!
+    </Text>
+  </View>
+</View>
 				
-				<View className="justify-center items-center gap-4 mt-6 flex-row flex-wrap">
-					{CATEGORIES_DATA.map((c) => (
-						<Pressable
-							key={c.id}
-							onPress={() => {
-								setSelectedCategory(c.id)
-								handleSelection(c.data)
-							}}
-						>
-							<ImageBackground
-								source={c.img}
-								resizeMode="cover"
-								className="h-44 w-44 overflow-hidden rounded-2xl border-2 border-black"
-							>
-								<LinearGradient
-									className="flex-1 rounded-lg justify-center"
-									colors={[
-										"rgba(0, 0,0, 0.5)",
-										"rgba(0, 0,0, 0.3)",
-									]}
-								>
-									<Text className="text-center text-3xl text-white font-medium">
-										{c.id.toUpperCase()}
-									</Text>
-								</LinearGradient>
-							</ImageBackground>
-						</Pressable>
-					))}
-				</View>
+<View className="justify-center items-center gap-4 mt-12 flex-row flex-wrap">
+  {CATEGORIES_DATA.map((c) => (
+    <Pressable
+      key={c.id}
+      onPress={() => {
+        setSelectedCategory(c.id);
+        handleSelection(c.data);
+      }}
+    >
+      <ImageBackground
+        source={c.img}
+        resizeMode="cover"
+        className="h-44 w-44 overflow-hidden rounded-2xl border-2 border-green-700"
+      >
+        {/* Overlay Label Container */}
+        <View className="absolute bottom-0 left-0 right-0 bg-[#D9D4AB]/90 rounded-b-2xl px-2 py-2">
+          <Text className="text-center text-xl font-extrabold text-green-900 tracking-wide">
+            {c.id.toUpperCase()}
+          </Text>
+        </View>
+      </ImageBackground>
+    </Pressable>
+  ))}
+</View>
+
 			</LinearGradient>
 			<View>
 				<Modal

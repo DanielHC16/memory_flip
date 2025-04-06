@@ -201,9 +201,10 @@ const FruitCards = () => {
 
 	return (
 		<LinearGradient
-			colors={["#35E89c", "#060433"]}
-			className="flex-1 items-center pt-10 px-4"
-		>
+		colors={["#A0A060", "#D9D4AB", "#FFF8DC"]}
+		className="flex-1 items-center pt-10 px-4"
+	>
+
 			<View className="w-full flex-row justify-between items-center">
 				<AntDesign
 					name="leftcircleo"
