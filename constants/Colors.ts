@@ -5,8 +5,13 @@ export const Colors = {
 	purple: "#D61C86",
 	skyblue: "#5FFBF1",
 	darkblue: "#051937",
-	red: "#FF0000",
+	red: "#ff1212",
 	black: "#000000",
+
+	// New Colors
+	green: "#32CD32",
+	white: "#FFFFFF",
+	
 
 	light: {
 		text: "#11181C",

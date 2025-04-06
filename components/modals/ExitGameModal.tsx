@@ -20,14 +20,14 @@ const ExitGameModal: FC<ExitModalProps> = ({
 				onRequestClose={onClose}
 			>
 				<View style={styles.modalBackground}>
-					<View className="bg-white p-5 items-center rounded-3xl gap-y-6">
+					<View className="bg-white p-7 items-center rounded-2xl gap-y-3">
 						<Text className="text-center text-2xl text-black">
-							Are you sure you want to exit game?
+							Confirm exit?
 						</Text>
 						<View className="w-full flex-row gap-x-2 items-center mt-4">
 							<LinearGradient
 								style={{ borderRadius: 16 }}
-								colors={[Colors.skyblue, Colors.darkblue]}
+								colors={[Colors.green, Colors.green]}
 								className="justify-center items-center w-20 h-14"
 							>
 								<Pressable
@@ -41,7 +41,7 @@ const ExitGameModal: FC<ExitModalProps> = ({
 								</Pressable>
 							</LinearGradient>
 							<LinearGradient
-								colors={[Colors.red, Colors.black]}
+								colors={[Colors.red, Colors.red]}
 								style={{ borderRadius: 16 }}
 								className="justify-center items-center w-20 h-14"
 							>
