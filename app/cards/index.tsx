@@ -201,9 +201,10 @@ const FruitCards = () => {
 
 	return (
 		<LinearGradient
-		colors={["#A0A060", "#D9D4AB", "#FFF8DC"]}
+		colors={["#A0A060", "#E0D7A6", "#D3E2A6"]}
 		className="flex-1 items-center pt-10 px-4"
-	>
+	  >
+	  
 
 			<View className="w-full flex-row justify-between items-center">
 				<AntDesign
@@ -253,13 +254,20 @@ const FruitCards = () => {
 					}}
 				/>
 			</View>
-			<Text className="text-2xl text-center font-bold text-cyan-950 mt-5">
-				{selectedCategory.toUpperCase()}
-			</Text>
+<View className="items-center mt-5">
+  {/* Category Name with Border */}
+  <Text className="text-3xl font-extrabold text-green-900 text-center mt-5 border-2 border-green-700 px-4 py-2 rounded-xl">
+    {selectedCategory.toUpperCase()}
+  </Text>
 
-			<Text className="text-3xl font-medium text-cyan-950 mt-5">
-				SCORE: {score}
-			</Text>
+  {/* Score */}
+  <Text className="text-lg font-medium text-white mt-5">
+    SCORE: <Text className="text-2xl text-yellow-600">{score}</Text>
+  </Text>
+</View>
+
+
+
 			<FlatList
 				keyExtractor={(item) => item.id.toString()}
 				data={shuffledData}
