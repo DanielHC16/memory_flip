@@ -84,11 +84,7 @@ const Selection = () => {
         className="h-44 w-44 overflow-hidden rounded-2xl border-2 border-green-700"
       >
         {/* Overlay Label Container */}
-        <View className="absolute bottom-0 left-0 right-0 bg-[#D9D4AB]/90 rounded-b-2xl px-2 py-2">
-          <Text className="text-center text-xl font-extrabold text-green-900 tracking-wide">
-            {c.id.toUpperCase()}
-          </Text>
-        </View>
+        
       </ImageBackground>
     </Pressable>
   ))}
