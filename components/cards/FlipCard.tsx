@@ -1,4 +1,4 @@
-import { View, Image, Pressable } from "react-native"
+import { View, Image, Pressable, Dimensions } from "react-native"
 import React, { FC, useEffect } from "react"
 import Animated, {
 	useAnimatedStyle,
@@ -6,6 +6,10 @@ import Animated, {
 	withTiming,
 } from "react-native-reanimated"
 import { FlipCardProps } from "@/models/cardType"
+
+const { width } = Dimensions.get("window")
+const CARD_MARGIN = 0.5
+const CARD_SIZE = (width / 3.4) - (CARD_MARGIN * 2)  // Fits 4 cards per row
 
 const FlipCard: FC<FlipCardProps> = ({
 	image,
@@ -19,7 +23,6 @@ const FlipCard: FC<FlipCardProps> = ({
 	const rotate = useSharedValue(0)
 
 	useEffect(() => {
-		// Handle flip animation based on isFlipped or isMatched states
 		rotate.value = withTiming(isFlipped || isMatched ? 0 : 180, {
 			duration: 300,
 		})
@@ -30,31 +33,46 @@ const FlipCard: FC<FlipCardProps> = ({
 	}))
 
 	const handlePress = () => {
-		if (isMatched) return // Don't allow flipping when the card is matched
-
+		if (isMatched) return
 		if (isPressable) {
 			onFlip(label, id)
 		}
 	}
 
 	return (
-		<Pressable onPress={handlePress}>
+		<Pressable onPress={handlePress} style={{ margin: CARD_MARGIN }}>
 			<Animated.View
-				className={`justify-center items-center h-24 w-24 rounded-2xl ${
+				className={`justify-center items-center rounded-2xl ${
 					isMatched ? "bg-transparent" : "bg-white"
 				}`}
-				style={[animatedStyle]}
+				style={[
+					animatedStyle,
+					{
+						width: CARD_SIZE,
+						height: CARD_SIZE,
+					},
+				]}
 			>
 				{isFlipped || isMatched ? (
 					<Image
 						resizeMode="cover"
-						className={`w-24 h-24 rounded-2xl ${
-							isMatched ? "hidden" : "visible"
-						}`}
+						style={{
+							width: CARD_SIZE,
+							height: CARD_SIZE,
+							borderRadius: 16,
+							display: isMatched ? "none" : "flex",
+						}}
 						source={image}
 					/>
 				) : (
-					<View className="w-24 h-24 rounded-2xl bg-white" />
+					<View
+						style={{
+							width: CARD_SIZE,
+							height: CARD_SIZE,
+							borderRadius: 16,
+							backgroundColor: "#fff",
+						}}
+					/>
 				)}
 			</Animated.View>
 		</Pressable>

@@ -27,19 +27,21 @@ const App = () => {
 			BackHandler.removeEventListener("hardwareBackPress", backAction)
 		}
 	}, [])
+
 	return (
 		<View className="flex-1">
 			<ImageBackground
 				source={require("@/assets/images/icon.png")}
 				resizeMode="cover"
 				style={{
-					justifyContent: "flex-end",
+					justifyContent: "center", // Center the content vertically
 					alignItems: "center",
 					flex: 1,
+					paddingTop: 290, // Add padding to move the button up a bit
 				}}
 			>
 				<Pressable
-					className="rounded-2xl px-4 py-2 border-2 border-white  mb-64"
+					className="rounded-lg px-6 py-4 border-4 border-yellow-300 hover:scale-105 transition-all duration-200" 
 					onPress={() => router.push("/screens/selection")}
 				>
 					<Text className="text-3xl font-medium text-white">
@@ -47,6 +49,7 @@ const App = () => {
 					</Text>
 				</Pressable>
 			</ImageBackground>
+
 			<View>
 				<ExitGameModal
 					onClose={() => setExitModalVisible(!exitModalVisible)}

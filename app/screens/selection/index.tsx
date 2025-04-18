@@ -92,40 +92,33 @@ const Selection = () => {
 
 			</LinearGradient>
 			<View>
-				<Modal
-					animationType="slide"
-					transparent={true}
-					visible={modalVisible}
-					statusBarTranslucent
-					onRequestClose={() => setModalVisible(false)}
-				>
-					<View style={styles.modalBackground}>
-						<LinearGradient
-							style={{ borderRadius: 16 }}
-							colors={[Colors.skyblue, Colors.light.tint]}
-							className="justify-center items-center py-5 w-96"
-						>
-							<Text className="text-white text-2xl font-bold">
-								Loading...
-							</Text>
-							<Text className="text-white text-2xl font-bold">
-								{/* {
-								activeCategoryLabel
-							} */}
-							</Text>
+	<Modal
+		animationType="fade"
+		transparent={true}
+		visible={modalVisible}
+		statusBarTranslucent
+		onRequestClose={() => setModalVisible(false)}
+	>
+		<View style={styles.modalBackground}>
+			<View style={styles.modalContent}>
+				<Text className="text-[#3C3B1F] text-2xl font-extrabold mb-2">
+					Loading...
+				</Text>
 
-							<View style={styles.gifView}>
-								<LottieView
-									style={{ flex: 1 }}
-									autoPlay
-									source={require("@/assets/gifs/colordots.json")}
-									loop
-								/>
-							</View>
-						</LinearGradient>
-					</View>
-				</Modal>
+				<View style={styles.gifView}>
+					<LottieView
+						style={{ flex: 1 }}
+						autoPlay
+						source={require("@/assets/gifs/colordots.json")}
+						loop
+					/>
+				</View>
 			</View>
+		</View>
+	</Modal>
+</View>
+
+
 		</View>
 	)
 }
@@ -135,12 +128,29 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "rgba(0, 0, 0, 0.7)",
+		backgroundColor: "rgba(0, 0, 0, 0.4)",
+		paddingHorizontal: 16,
+	},
+	modalContent: {
+		width: '80%',
+		backgroundColor: "#FFFDEB", // cornsilk-style color
+		borderRadius: 24,
+		paddingVertical: 24,
+		paddingHorizontal: 20,
+		alignItems: "center",
+		elevation: 8,
+		shadowColor: "#000",
+		shadowOffset: { width: 0, height: 4 },
+		shadowOpacity: 0.2,
+		shadowRadius: 6,
 	},
 	gifView: {
-		height: 200,
-		aspectRatio: 1,
+		height: 140,
+		width: 140,
+		marginTop: 8,
 	},
 })
+
+
 
 export default Selection

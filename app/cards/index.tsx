@@ -206,17 +206,17 @@ const FruitCards = () => {
 	  >
 	  
 
-			<View className="w-full flex-row justify-between items-center">
-				<AntDesign
-					name="leftcircleo"
-					size={40}
-					color="white"
-					onPress={() => {
-						setExitModalVisible(!exitModalVisible)
-						setIsPlaying(false)
-						animationRef.current?.pause()
-					}}
-				/>
+	  <View className="w-full flex-row justify-between items-center">
+  <AntDesign
+    name="leftcircleo"
+    size={40}
+    color="white"
+    onPress={() => {
+      setExitModalVisible(!exitModalVisible)
+      setIsPlaying(false)
+      animationRef.current?.pause()
+    }}
+  />
 
 				<View
 					style={{
@@ -269,13 +269,22 @@ const FruitCards = () => {
 
 
 			<FlatList
-				keyExtractor={(item) => item.id.toString()}
-				data={shuffledData}
-				renderItem={renderItem}
-				contentContainerStyle={{ rowGap: 10, marginTop: 24 }}
-				columnWrapperStyle={{ gap: 10 }}
-				numColumns={3}
-			/>
+  keyExtractor={(item) => item.id.toString()}
+  data={shuffledData}
+  renderItem={renderItem}
+  contentContainerStyle={{
+    rowGap: shuffledData.length <= 6 ? 20 : 10,
+    marginTop: 24,
+    justifyContent: "center",
+    alignItems: shuffledData.length <= 6 ? "center" : undefined,
+  }}
+  columnWrapperStyle={{
+    gap: shuffledData.length <= 6 ? 20 : 10,
+    justifyContent: shuffledData.length <= 6 ? "center" : "flex-start",
+  }}
+  numColumns={shuffledData.length <= 6 ? 2 : 3}
+/>
+
 			<View>
 				<ExitModal
 					onClose={() => setExitModalVisible(!exitModalVisible)}
