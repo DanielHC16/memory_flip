@@ -51,11 +51,11 @@ const AppLayout = () => {
 	return (
 		<CardProvider>
 			<View style={{ flex: 1 }}>
-				<Stack>
-					<Stack.Screen name="index" options={{ headerShown: false }} />
-					<Stack.Screen name="cards/index" options={{ headerShown: false }} />
-					<Stack.Screen name="screens/selection/index" options={{ headerShown: false }} />
-				</Stack>
+				<Stack
+					screenOptions={{
+						headerShown: false, // ✅ Hide the ugly white header for all screens
+					}}
+				/>
 
 				{/* Mute/Unmute Button */}
 				<TouchableOpacity style={styles.muteButton} onPress={toggleMute}>

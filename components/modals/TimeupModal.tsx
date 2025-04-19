@@ -1,11 +1,36 @@
 import { View, Text, Modal, Pressable, StyleSheet } from "react-native"
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import LottieView from "lottie-react-native"
+import { Audio } from "expo-av"
 import { Colors } from "@/constants/Colors"
 import { Entypo } from "@expo/vector-icons"
 import { TimeupModalProps } from "@/models/ModalTypes"
 
 const TimeupModal: FC<TimeupModalProps> = ({ onClose, score, visible }) => {
+  useEffect(() => {
+    let sound: Audio.Sound
+
+    const playDefeatSound = async () => {
+      try {
+        sound = new Audio.Sound()
+        await sound.loadAsync(require("@/assets/audio/defeat.mp3"))
+        await sound.playAsync()
+      } catch (error) {
+        console.log("Error playing defeat sound:", error)
+      }
+    }
+
+    if (visible) {
+      playDefeatSound()
+    }
+
+    return () => {
+      if (sound) {
+        sound.unloadAsync()
+      }
+    }
+  }, [visible])
+
   return (
     <View>
       <Modal
@@ -17,10 +42,7 @@ const TimeupModal: FC<TimeupModalProps> = ({ onClose, score, visible }) => {
       >
         <View style={styles.modalBackground}>
           <View style={styles.modalContent}>
-            <Pressable
-              onPress={onClose}
-              style={styles.closeButton}
-            >
+            <Pressable onPress={onClose} style={styles.closeButton}>
               <Entypo name="cross" size={24} color="white" />
             </Pressable>
 
@@ -79,12 +101,12 @@ const styles = StyleSheet.create({
   lossText: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "#F87171", // Red for loss
+    color: "#F87171",
     marginBottom: 8,
   },
   scoreText: {
     fontSize: 24,
-    fontWeight: "medium",
+    fontWeight: "500",
     color: "#333",
     marginBottom: 24,
   },
@@ -101,7 +123,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   confirmButton: {
-    backgroundColor: "#F87171", // Red button
+    backgroundColor: "#F87171",
   },
   buttonText: {
     color: "white",

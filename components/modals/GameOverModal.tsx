@@ -1,6 +1,7 @@
 import { View, Text, Modal, Pressable, StyleSheet } from "react-native"
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import LottieView from "lottie-react-native"
+import { Audio } from "expo-av"
 import { Colors } from "@/constants/Colors"
 import { Entypo } from "@expo/vector-icons"
 import { GameOverModalProps } from "@/models/ModalTypes"
@@ -11,6 +12,30 @@ const GameOverModal: FC<GameOverModalProps> = ({
   visible,
   onConfirm,
 }) => {
+  useEffect(() => {
+    let sound: Audio.Sound
+
+    const playVictorySound = async () => {
+      try {
+        sound = new Audio.Sound()
+        await sound.loadAsync(require("@/assets/audio/victory.mp3"))
+        await sound.playAsync()
+      } catch (error) {
+        console.log("Error playing sound:", error)
+      }
+    }
+
+    if (visible) {
+      playVictorySound()
+    }
+
+    return () => {
+      if (sound) {
+        sound.unloadAsync()
+      }
+    }
+  }, [visible])
+
   return (
     <View>
       <Modal
@@ -86,19 +111,19 @@ const styles = StyleSheet.create({
   winText: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "#10B981", // Green for a win
+    color: "#10B981",
     marginBottom: 8,
   },
   scoreText: {
     fontSize: 24,
-    fontWeight: "medium",
+    fontWeight: "500",
     color: "#333",
     marginBottom: 24,
   },
   highlightedScore: {
     fontSize: 26,
     fontWeight: "bold",
-    color: "#10B981", // Highlighting the score value in green
+    color: "#10B981",
   },
   gifView: {
     height: 200,
@@ -107,7 +132,7 @@ const styles = StyleSheet.create({
   },
   animation: {
     flex: 1,
-    height: 200, // Keeps the animation in place where the text is
+    height: 200,
     marginBottom: 24,
   },
   button: {
@@ -118,7 +143,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   confirmButton: {
-    backgroundColor: "#10B981", // Green button
+    backgroundColor: "#10B981",
   },
   buttonText: {
     color: "white",
